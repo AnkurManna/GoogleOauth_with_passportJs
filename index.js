@@ -26,8 +26,7 @@ app.get('/auth/google', passport.authenticate('google',{
 
 app.get("/auth/google/callback", passport.authenticate('google'))
 
-//client 468248587810-lqclt8t7tra69gl31qgsrs10m289g20q.apps.googleusercontent.com
-//secret gxl6k4rPlMQiiwW21afnmcMb
+
 app.listen(PORT, () => {
     console.log('Server is listening port '+PORT);
 })
