@@ -4,7 +4,8 @@ const app = express();
 const keys = require('./config/keys');
 const passport = require('passport');
 const cookieSessions = require('cookie-session');
-const PORT = process.env.PORT || 3000;
+const cors = require('cors');
+const PORT = process.env.PORT || 5000;
 require('./models/users');
 require('./services/passport')
 /*
@@ -20,9 +21,10 @@ mongoose.connect(keys.mongoURI,{
     console.log("Yeah connected!!");
 })
 
+//this thing encrypt necessary info and sets in browser
 app.use(
     cookieSessions({
-        maxAge: 30*24*60*60*100,
+        maxAge:3600*1000,
         keys:[keys.cookieKey]
     })
 )
@@ -35,7 +37,7 @@ var new_user = new User2({
     name: 'Manish', 
     age:34 
 }) 
-  
+ /* 
 new_user.save(function(err,result){ 
     if (err){ 
         console.log(err); 
@@ -43,8 +45,11 @@ new_user.save(function(err,result){
     else{ 
         console.log(result) 
     } 
-})
+})*/
+app.use(cors())
+//this thing initializes above cookieSession implementation
 app.use(passport.initialize())
+//it tells app to handle cookies from sessions
 app.use(passport.session());
 require('./routes/authRoute')(app)
 

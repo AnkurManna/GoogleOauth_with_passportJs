@@ -5,7 +5,9 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:[true,'one user must have a name']
     },*/
-    googleId:String
+    googleId:String,
+    username:String,
+    picture:String
 })
 
 mongoose.model("User",userSchema);
